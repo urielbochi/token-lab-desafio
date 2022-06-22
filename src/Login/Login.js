@@ -27,8 +27,10 @@ function Login() {
         </div>
         <p className="or__weight">Or</p>
         <div className="flex__row icons-gap">
-          <img alt="Icone com fundo branco do Google. É um G pintado de quatro cores distintas, vermelho, amarelo, verde e azul." className="login__icons" src={Google} />
-          <img alt="Icone do Facebook em fundo azul. Letra f de cor branca em um fundo azul claro." className="login__icons" src={Facebook} />
+          <img alt="Icone com fundo branco do Google. É um G pintado de quatro cores distintas, vermelho, amarelo, verde e azul." 
+          className="login__icons" src={Google} />
+          <img alt="Icone do Facebook em fundo azul. Letra f de cor branca em um fundo azul claro." 
+          className="login__icons" src={Facebook} />
         </div>
         <button
           type="submit"
