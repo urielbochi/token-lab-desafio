@@ -5,3 +5,16 @@ import {
   Routes as Switch,
   Navigate,
 } from "react-router-dom";
+import Login from "../Login/Login";
+
+function MainRoutes() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/login" element={<Login />} />
+      </Switch>
+    </Router>
+  );
+}
+
+export default MainRoutes;
