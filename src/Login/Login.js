@@ -1,4 +1,5 @@
 import React from "react";
+import "./Login.css";
 import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
 import { useNavigate } from "react-router-dom";
