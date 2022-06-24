@@ -18,7 +18,7 @@ function Calendar() {
   const handleDate = (target) => {
     setDataPicker(target.dateStr);
     setModalStatus(true);
-    console.log(target)
+    console.log(target);
   };
 
   const exitModal = () => {
@@ -70,10 +70,15 @@ function Calendar() {
         ></input>
         <button onClick={() => addToList()}>Adicionar</button>
         <button onClick={() => exitModal()}>Fechar</button>
-        {eventList.map((item, index) => item.date === dataPicker && <div>
-          <h3>{item.title}</h3>
-          <h3 onClick={() => removeEvent(index)}>Remover</h3>
-        </div>)}
+        {eventList.map(
+          (item, index) =>
+            item.date === dataPicker && (
+              <div>
+                <h3>{item.title}</h3>
+                <h3 onClick={() => removeEvent(index)}>Remover</h3>
+              </div>
+            )
+        )}
       </Modal>
     </div>
   );
