@@ -1,0 +1,12 @@
+.modal__config {
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  right: 30%;
+  bottom: 20%;
+  border: "1px solid #ccc";
+  background: #6a6767;
+  overflow: "auto";
+  padding: "20px";
+  z-index: 99999;
+}
