@@ -11,13 +11,22 @@ export default function ContextProvider({ children }) {
       stTime: "",
       edTime: "",
     };
+  const [dateModal, setDateModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
   const [eventInput, setEventInput] = useState(eventHolder);
   const [eventList, setEventList] = useState([]);
   const [eventTitleHolder, setEventTitleHolder] = useState("");
-  const [dateModal, setDateModal] = useState(false);
-  const [eventModal, setEventModal] = useState(false);
   const [editButtonClicked, setEditButtonClicked] = useState(false);
 
+  const calendarClick = (target) => {
+    setDataPicker(target.dateStr);
+    setDateModal(true);
+  };
+  
+  const eventClick = (clickInfo) => {
+    setEventModal(true);
+    setEventTitleHolder(clickInfo.event.title);
+  };
 
   const exitModal = () => {
     setDateModal(false);
@@ -27,17 +36,7 @@ export default function ContextProvider({ children }) {
     setEventModal(false);
   };
 
-  const calendarClick = (target) => {
-    setDataPicker(target.dateStr);
-    setDateModal(true);
-  };
-
-  const eventClick = (clickInfo) => {
-    setEventModal(true);
-    setEventTitleHolder(clickInfo.event.title);
-    console.log(clickInfo);
-  };
-
+  // Edit dependencies (ViewEvent)
   const openEdit = () => {
     setEditButtonClicked(true)
     setEventModal(false)

@@ -42,8 +42,8 @@ p {
   height: 600px;
   background-color: rgba(250, 250, 250, 0.7);
   border-radius: 5px;
-  box-shadow: rgba(0, 47, 255, 0.4) -5px 5px, rgba(11, 85, 205, 0.3) -10px 10px,
-    rgba(240, 46, 170, 0.2) -15px 15px, rgba(2, 59, 248, 0.1) -20px 20px,
+  box-shadow: rgba(70, 175, 196, 0.4) -5px 5px, rgba(4, 0, 87, 0.3) -10px 10px,
+  rgba(8, 250, 234, 0.4) -15px 15px, rgba(2, 59, 248, 0.1) -20px 20px,
     rgba(240, 46, 170, 0.05) -25px 25px;
 }
 
@@ -55,7 +55,7 @@ p {
 }
 
 .login__background {
-  background-image: url("../Images/IndustryLogin.png");
+  background-image: url("../Images/IndustryLogin.jpg");
   background-size: cover;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
     0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
@@ -86,6 +86,7 @@ p {
   padding: 10px;
   font-size: 20px;
   border-radius: 5px;
+  background: black;
 }
 
 .icons-gap {

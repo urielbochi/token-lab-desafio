@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Modal from "react-modal";
 import { MyContext } from "../Context/Context";
 
-function CreateEvent({ thisIsClicked }) {
+function CreateEvent() {
   const {
     eventList,
     setEventList,
@@ -91,7 +91,7 @@ function CreateEvent({ thisIsClicked }) {
               placeholder="Select a date"
             />
             <label for="floatingInput" class="text-gray-700">
-              Selecione o horário de início
+              Selecione o horário de início⠀⠀
             </label>
           </div>
         </div>
