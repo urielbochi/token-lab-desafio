@@ -1,7 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "react-modal";
+import { MyContext } from "../Context/Context";
 
-function CreateEvent({ dateModal, exitModal, handleChange, addEvent}) {
+function CreateEvent({ thisIsClicked }) {
+  const {
+    eventList,
+    setEventList,
+    eventInput,
+    setEventInput,
+    dateModal,
+    setDateModal,
+    exitModal,
+    dataPicker,
+    editButtonClicked,
+    setEditButtonClicked
+  } = useContext(MyContext);
+
+  const editEvent = () => {
+    const newData = [...eventList];
+    newData[0] = eventInput;
+    setEventList(newData);
+    setEditButtonClicked(false)
+    setDateModal(false)
+  };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setEventInput({
+      ...eventInput,
+      [name]: value,
+      date: dataPicker,
+    });
+  };
+
+  const createEvent = () => {
+    setDateModal(false);
+    setEventInput({});
+    setEventList([...eventList, eventInput]);
+  };
+
   return (
     <div>
       <Modal
@@ -9,9 +46,9 @@ function CreateEvent({ dateModal, exitModal, handleChange, addEvent}) {
         isOpen={dateModal}
         onRequestClose={exitModal}
       >
-        <h1 className="h-11 text-center text-5xl mb-10 font__desert">
-          Adicionar evento
-        </h1>
+        {editButtonClicked ? (
+          <h1 className="h-11 text-center text-5xl mb-10 font__desert">Editar Evento</h1>
+        ) : <h1 className="h-11 text-center text-5xl mb-10 font__desert">Adicionar Evento</h1> }
         <div class="relative z-0 w-full mb-6 group">
           <input
             type="text"
@@ -21,10 +58,7 @@ function CreateEvent({ dateModal, exitModal, handleChange, addEvent}) {
             placeholder=" "
             required
           />
-          <label
-            for="floating_email"
-            class="peer-focus:font-medium absolute  text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
+          <label class="peer-focus:font-medium absolute  text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
             Título do evento
           </label>
         </div>
@@ -37,10 +71,7 @@ function CreateEvent({ dateModal, exitModal, handleChange, addEvent}) {
             placeholder=" "
             required
           />
-          <label
-            for="floating_password"
-            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
+          <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
             Descrição
           </label>
         </div>
@@ -73,14 +104,28 @@ function CreateEvent({ dateModal, exitModal, handleChange, addEvent}) {
           </div>
         </div>
         <div className="flex justify-center">
-          <button
-            onClick={() => addEvent()}
-            class="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-          >
-            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Adicionar
-            </span>
-          </button>
+          {!editButtonClicked && (
+            <button
+              onClick={() => createEvent()}
+              class="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+            >
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Adicionar
+              </span>
+            </button>
+          )}
+        </div>
+        <div className="flex justify-center">
+          {editButtonClicked && (
+            <button
+              onClick={() => editEvent()}
+              class="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+            >
+              <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Editar
+              </span>
+            </button>
+          )}
         </div>
       </Modal>
     </div>

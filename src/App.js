@@ -1,11 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import MainRoutes from './Routes/Routes';
+import logo from "./logo.svg";
+import "./App.css";
+import MainRoutes from "./Routes/Routes";
+import ContextProvider from "./Context/Context";
 
 function App() {
   return (
     <div>
-     <MainRoutes/>
+      <ContextProvider>
+        <MainRoutes />
+      </ContextProvider>
     </div>
   );
 }
