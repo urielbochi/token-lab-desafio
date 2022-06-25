@@ -13,15 +13,21 @@ function CreateEvent({ thisIsClicked }) {
     exitModal,
     dataPicker,
     editButtonClicked,
-    setEditButtonClicked
+    setEditButtonClicked,
   } = useContext(MyContext);
+
+  const createEvent = () => {
+    setDateModal(false);
+    setEventInput({});
+    setEventList([...eventList, eventInput]);
+  };
 
   const editEvent = () => {
     const newData = [...eventList];
     newData[0] = eventInput;
     setEventList(newData);
-    setEditButtonClicked(false)
-    setDateModal(false)
+    setEditButtonClicked(false);
+    setDateModal(false);
   };
 
   const handleChange = ({ target }) => {
@@ -33,12 +39,6 @@ function CreateEvent({ thisIsClicked }) {
     });
   };
 
-  const createEvent = () => {
-    setDateModal(false);
-    setEventInput({});
-    setEventList([...eventList, eventInput]);
-  };
-
   return (
     <div>
       <Modal
@@ -47,8 +47,14 @@ function CreateEvent({ thisIsClicked }) {
         onRequestClose={exitModal}
       >
         {editButtonClicked ? (
-          <h1 className="h-11 text-center text-5xl mb-10 font__desert">Editar Evento</h1>
-        ) : <h1 className="h-11 text-center text-5xl mb-10 font__desert">Adicionar Evento</h1> }
+          <h1 className="h-11 text-center text-5xl mb-10 font__desert">
+            Editar Evento
+          </h1>
+        ) : (
+          <h1 className="h-11 text-center text-5xl mb-20 font__desert">
+            Adicionar Evento
+          </h1>
+        )}
         <div class="relative z-0 w-full mb-6 group">
           <input
             type="text"
