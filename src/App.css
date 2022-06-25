@@ -15,6 +15,30 @@ html {
   font-family: Pixel;
 }
 
+.font__magnolia {
+  font-family: Magnolia;
+}
+
+.font__desert {
+  font-family: DesertDreams;
+}
+
+.font__woman {
+  font-family: Woman;
+}
+
+.font__betty {
+  font-family: Betty;
+}
+
+.font__artisa {
+  font-family: Artisa;
+}
+
+.font__adore {
+  font-family: Adore;
+}
+
 .font__title {
   font-size: 40px;
 }
@@ -23,14 +47,9 @@ html {
   font-size: 20px;
 }
 
-.background__black {
-  background-color: black;
-}
-
 .click__pointer {
   cursor: pointer;
 }
-
 
 @font-face {
   font-family: Pixel;
@@ -49,6 +68,34 @@ html {
 @font-face {
   font-family: DesertDreams;
   src: url("./Fonts/DesertDreamsRegular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Woman;
+  src: url("./Fonts/WomanFontRegular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Betty;
+  src: url("./Fonts/Beatty-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Artisa;
+  src: url("./Fonts/Artisa-Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Adore;
+  src: url("./Fonts/AdoreRegular.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

@@ -7,22 +7,36 @@ import Modal from "react-modal";
 
 function Calendar() {
   const [dataPicker, setDataPicker] = useState("");
+  const [titlePicker, setTitlePicker] = useState("");
   const [modalStatus, setModalStatus] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
   const eventHolder = {
     title: "",
     description: "",
     date: dataPicker,
+    stTime: "",
+    edTime: "",
   };
   const [eventInput, setEventInput] = useState(eventHolder);
   const [eventList, setEventList] = useState([]);
+
+  const exitModal = () => {
+    setModalStatus(false);
+  };
+
+  const exitEventModal = () => {
+    setEventModal(false);
+  };
 
   const handleDate = (target) => {
     setDataPicker(target.dateStr);
     setModalStatus(true);
   };
 
-  const exitModal = () => {
-    setModalStatus(false);
+  const handleEvent = (clickInfo) => {
+    setEventModal(true);
+    setTitlePicker(clickInfo.event.title);
+    console.log(clickInfo);
   };
 
   const handleChange = ({ target }) => {
@@ -59,6 +73,7 @@ function Calendar() {
           className="calendar-set"
           plugins={[daygridPlugin, interactionPlugin]}
           dateClick={handleDate}
+          eventClick={handleEvent}
           displayEventTime={true}
           events={eventList.map((item) => {
             return item;
@@ -70,7 +85,9 @@ function Calendar() {
         isOpen={modalStatus}
         onRequestClose={exitModal}
       >
-        <h1 className="h-11 text-center text-5xl mb-10">Adicionar evento</h1>
+        <h1 className="h-11 text-center text-5xl mb-10 font__desert">
+          Adicionar evento
+        </h1>
         <div class="relative z-0 w-full mb-6 group">
           <input
             type="text"
@@ -82,7 +99,7 @@ function Calendar() {
           />
           <label
             for="floating_email"
-            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            class="peer-focus:font-medium absolute  text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Título do evento
           </label>
@@ -103,30 +120,59 @@ function Calendar() {
             Descrição
           </label>
         </div>
-        <div className="flex flex-col mt-5">
-          <button onClick={() => addToList()} class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
-            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+        <div class="flex justify-center">
+          <div class="timepicker relative form-floating mb-3 xl:w-96">
+            <input
+              type="time"
+              name="stTime"
+              onChange={handleChange}
+              class="form-control block px-3 py-1.5 w-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Select a date"
+            />
+            <label for="floatingInput" class="text-gray-700">
+              Selecione o horário de início
+            </label>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <div class="timepicker relative form-floating mb-3 xl:w-96">
+            <input
+              type="time"
+              name="edTime"
+              onChange={handleChange}
+              class="form-control block px-3 py-1.5 w-full text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Select a date"
+            />
+            <label for="floatingInput" class="text-gray-700">
+              Selecione o horário de término
+            </label>
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <button
+            onClick={() => addToList()}
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+          >
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
               Adicionar
             </span>
           </button>
-          <button class="relative inline-flex mb-7 items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800">
-            <span class="relative px-5 py-2.5 transition-all ease-in duration-75  dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-              Fechar
-            </span>
-          </button>
         </div>
-        <h1 className="text-center text-5xl">Eventos agendados</h1>
-        <p className="text-center">{dataPicker}</p>
+      </Modal>
+      <Modal className="modal__config" isOpen={eventModal} onRequestClose={exitEventModal}>
         {eventList.map(
           (item, index) =>
-            item.date === dataPicker && (
-              <div className="text-center">
-                <h3 className="font-black text-2xl">Nome do evento</h3>
-                <h3>{item.title}</h3>
-                <h3 className="font-black text-2xl">Descrição</h3>
-                <h3 className="mb-5">{item.description}</h3>
-                <button type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Remover evento</button>
-                <button type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Editar evento</button>
+            item.title === titlePicker && (
+              <div>
+                <h1 className="font__desert text-5xl mb-5 text-center">Evento agendado</h1>
+                <h3 className="font__desert text-center font-black">Nome do evento</h3>
+                <h3 className="mb-5 text-center">{item.title}</h3>
+                <h3 className="font__desert text-center font-black">Descrição</h3>
+                <h3 className="mb-5 text-center">{item.description}</h3>
+                <h3 className="text-center font__desert font-black">Inicio</h3>
+                <h3 className="mb-5 text-center">{item.stTime}h</h3>
+                <h3 className="text-center font__desert font-black">Término</h3>
+                <h3 className="text-center">{item.edTime}h</h3>
               </div>
             )
         )}
