@@ -6,24 +6,25 @@ import { useNavigate } from "react-router-dom";
 import { MyContext } from "../Context/Context";
 import { loginAccount } from "../Services/fetchAPI";
 import { getUser } from "../Services/fetchAPI";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const nav = useNavigate();
-  const { loginInfo, handleLoginChange } = useContext(MyContext);
+  const { loginInfo, handleLoginChange, userAuthId, setUserAuthId, setCookie } =
+    useContext(MyContext);
   const [msg, setMsg] = useState("");
   const [authToken, setAuthToken] = useState("");
-  const [status, setStatus] = useState(0)
+  const [status, setStatus] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getUser(authToken)
+      const user = await getUser(authToken, setUserAuthId, setCookie);
     };
 
-    if(status === 200) {
-      fetchData() 
+    if (status === 200) {
+      fetchData();
     }
-  },[status])
-
+  }, [status]);
   return (
     <div className="login__background login__container">
       <h1 className="color__white font__magnolia font__title mb-5">
@@ -77,9 +78,16 @@ function Login() {
           />
         </div>
         <button
-         onClick={() => {
-          loginAccount(loginInfo, setMsg, setAuthToken, setStatus)
-        }}
+          onClick={() => {
+            loginAccount(
+              loginInfo,
+              setMsg,
+              setAuthToken,
+              setStatus,
+              setCookie,
+              authToken
+            );
+          }}
           className="color__white button__signup font__magnolia"
         >
           Sign in
@@ -94,6 +102,7 @@ function Login() {
           </b>
         </p>
       </div>
+      {userAuthId >= 1 && nav("/calendar")}
     </div>
   );
 }

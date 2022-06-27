@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 import { MyContext } from "../Context/Context";
 import { postEvent } from "../Services/fetchAPI";
+import { withCookies, Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 function CreateEvent() {
   const {
@@ -15,13 +17,17 @@ function CreateEvent() {
     dataPicker,
     editButtonClicked,
     setEditButtonClicked,
+    userAuthId,
+    cookies,
   } = useContext(MyContext);
 
-  const createEvent = () => {
-    setDateModal(false);
-    setEventInput({});
-    setEventList([...eventList, eventInput]);
-  };
+  const [userLsId, setUserLsId] = useState();
+
+  useEffect(() => {
+    const recoverUserIdFromLs = JSON.parse(localStorage.getItem("userId"));
+
+    setUserLsId(recoverUserIdFromLs);
+  }, []);
 
   const editEvent = () => {
     const newData = [...eventList];
@@ -39,6 +45,9 @@ function CreateEvent() {
       date: dataPicker,
     });
   };
+
+  const cookieId = cookies.userId
+
 
   return (
     <div>
@@ -114,8 +123,8 @@ function CreateEvent() {
           {!editButtonClicked && (
             <button
               onClick={() => {
-                postEvent(eventInput, eventList, setEventList)
-                setDateModal(false)
+                postEvent(eventInput, eventList, setEventList, cookieId);
+                setDateModal(false);
                 setEventInput({});
               }}
               class="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"

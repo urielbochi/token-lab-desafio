@@ -1,4 +1,6 @@
 import React, { createContext, useState } from "react";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export const MyContext = createContext();
 
@@ -17,6 +19,8 @@ export default function ContextProvider({ children }) {
   const [eventList, setEventList] = useState([]);
   const [eventTitleHolder, setEventTitleHolder] = useState("");
   const [editButtonClicked, setEditButtonClicked] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['userId']);
+
   const loginHolder = {
     username: '',
     email: '',
@@ -24,6 +28,7 @@ export default function ContextProvider({ children }) {
     confirmPassword: ''
   }
   const [loginInfo, setLoginInfo] = useState(loginHolder)
+  const [userAuthId, setUserAuthId] = useState()
 
   const handleLoginChange = (e) => {
     const { name, value } = e.target
@@ -81,7 +86,10 @@ export default function ContextProvider({ children }) {
     handleLoginChange,
     loginInfo,
     setLoginInfo,
-    handleLoginChange
-
+    handleLoginChange,
+    userAuthId,
+    setUserAuthId,
+    cookies,
+    setCookie
   }}>{children}</MyContext.Provider>;
 }

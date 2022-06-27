@@ -9,12 +9,13 @@ import { MyContext } from "../Context/Context";
 import { getEvents } from "../Services/fetchAPI";
 
 function Calendar() {
-  const { calendarClick, eventClick, eventList, setEventList } =
+  const { calendarClick, eventClick, eventList, setEventList, cookies } =
     useContext(MyContext);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getEvents(1, setEventList);
+      const userCookieId = cookies.userId
+      const data = await getEvents(userCookieId, setEventList);
     };
     fetchData()
   }, []);
@@ -26,8 +27,6 @@ function Calendar() {
       </div>
     )
   }
-
-  console.log(eventList)
 
   return (
     <div>
