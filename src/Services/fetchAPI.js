@@ -1,15 +1,17 @@
 import axios from "axios";
 
 
-export async function registerAccount(loginData) {
+export async function registerAccount(loginData, msg, setMsg) {
   axios
     .post("http://localhost:3000/register", {
       name: loginData.username,
       email: loginData.email,
       password: loginData.password,
     })
-    .then((response) => console.log(response))
-    .catch((err) => console.log(err));
+    .then((response) => {
+        console.log(response.data)
+    } )
+    .catch((err) => setMsg(err.response.data));
 }
 
 

@@ -7,6 +7,7 @@ import { MyContext } from "../Context/Context";
 function Register() {
   const nav = useNavigate();
   const { loginInfo, handleLoginChange } = useContext(MyContext);
+  const [msg, setMsg] = useState("");
 
   return (
     <div className="login__background login__container">
@@ -18,6 +19,14 @@ function Register() {
           <h1 className="font__artisa title__size">Welcome to tklab</h1>
           <p className="font__desert mb-5 text-lg	">Sign up a new account</p>
         </div>
+        {msg && (
+          <div
+            class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            role="alert"
+          >
+            <span class="font-medium">Error!</span> {msg.error}
+          </div>
+        )}
         <div className="reg__container">
           <div className="login__login-input-field">
             <span className="text__align-left font__pixel">
@@ -67,7 +76,9 @@ function Register() {
           <button
             type="submit"
             className="background__black color__white button__signup reg__sign-up"
-            onClick={() => registerAccount(loginInfo)}
+            onClick={() => {
+              registerAccount(loginInfo, msg, setMsg);
+            }}
           >
             Sign up
           </button>
