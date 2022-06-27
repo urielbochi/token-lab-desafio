@@ -11,6 +11,7 @@ export async function registerAccount(loginData, msg, setMsg) {
     })
     .then((response) => {
         console.log(response.data)
+        setMsg({ sucess: "Your account has been successfully created!"})
     } )
     .catch((err) => setMsg(err.response.data));
 }
