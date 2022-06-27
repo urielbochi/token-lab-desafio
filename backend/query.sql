@@ -1,0 +1,27 @@
+DROP DATABASE IF EXISTS calendary;
+
+CREATE DATABASE calendary;
+
+USE calendary;
+
+CREATE TABLE IF NOT EXISTS users(
+id INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(250) NOT NULL,
+email VARCHAR(250) NOT NULL,
+password VARCHAR(250) NOT NULL,
+created_At VARCHAR(250),
+updated_At VARCHAR(250)
+) engine = InnoDB;
+
+CREATE TABLE IF NOT EXISTS events(
+id INT PRIMARY KEY AUTO_INCREMENT,
+title VARCHAR(250) NOT NULL,
+date VARCHAR(250) NOT NULL,
+description VARCHAR(250) NOT NULL,
+st VARCHAR(250) NOT NULL,
+et VARCHAR(250) NOT NULL,
+userId integer,
+FOREIGN KEY(`userId`)
+REFERENCES `users` (`id`)
+) engine = InnoDB;
+
