@@ -6,21 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const nav = useNavigate();
-  const loginHolder = {
-    name: '',
-    email: '',
-    password: '',
-  }
-  const [loginInfo, setLoginInfo] = useState(loginHolder)
-
-
-  const handleLoginChange = ({ target }) => {
-    const { name, value } = target
-    setLoginInfo({
-      ...loginInfo,
-      [name]:value,
-    })
-  }
 
   return (
     <div className="login__background login__container">
@@ -34,11 +19,11 @@ function Login() {
         </div>
         <div className="login__login-input-field">
           <span className="text__align-left font__artisa">Email</span>
-          <input name="email" onChange={handleLoginChange} className="input__style" required />
+          <input name="email" className="input__style" required />
         </div>
         <div className="login__login-input-field">
           <span className="text__align-left font__artisa">Password</span>
-          <input name="password" onChange={handleLoginChange} type="password" className="input__style mrg__bottom" required />
+          <input name="password" type="password" className="input__style mrg__bottom" required />
         </div>
         <p className="font-black font__artisa">Or</p>
         <div className="flex__row icons-gap">

@@ -4,7 +4,7 @@ import axios from "axios";
 export async function registerAccount(loginData) {
   axios
     .post("http://localhost:3000/register", {
-      name: loginData.name,
+      name: loginData.username,
       email: loginData.email,
       password: loginData.password,
     })

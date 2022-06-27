@@ -17,6 +17,20 @@ export default function ContextProvider({ children }) {
   const [eventList, setEventList] = useState([]);
   const [eventTitleHolder, setEventTitleHolder] = useState("");
   const [editButtonClicked, setEditButtonClicked] = useState(false);
+  const loginHolder = {
+    username: '',
+    email: '',
+    password: '',
+  }
+  const [loginInfo, setLoginInfo] = useState(loginHolder)
+
+  const handleLoginChange = (e) => {
+    const { name, value } = e.target
+    setLoginInfo({
+      ...loginInfo,
+      [name]:value,
+    })
+  }
 
   const calendarClick = (target) => {
     setDataPicker(target.dateStr);
@@ -62,6 +76,11 @@ export default function ContextProvider({ children }) {
     eventClick,
     setEventModal,
     openEdit,
-    setEditButtonClicked
+    setEditButtonClicked,
+    handleLoginChange,
+    loginInfo,
+    setLoginInfo,
+    handleLoginChange
+
   }}>{children}</MyContext.Provider>;
 }
