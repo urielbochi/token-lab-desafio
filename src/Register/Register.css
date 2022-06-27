@@ -1,0 +1,44 @@
+.reg__username {
+    background: url("../Images/Username.png") no-repeat right;
+    background-size: 40px;
+    background-color: azure;
+}
+
+.reg__mail {
+    background: url("../Images/Mail.png") no-repeat right;
+    background-size: 40px;
+    background-color: azure;
+}
+
+.reg__password {
+    background: url("../Images/Password.png") no-repeat right;
+    background-size: 30px;
+    background-color: azure;
+}
+
+.reg__retype {
+    background: url("../Images/Retype.png") no-repeat right;
+    background-size: 40px;
+    background-color: azure;
+}
+
+.reg__sign-up {
+    margin-top: 20px;
+}
+
+.reg__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+  
