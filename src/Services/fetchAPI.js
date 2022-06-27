@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export async function registerAccount(loginData, msg, setMsg) {
+export async function registerAccount(loginData, setMsg) {
   axios
     .post("http://localhost:3000/register", {
       name: loginData.username,
@@ -16,6 +16,9 @@ export async function registerAccount(loginData, msg, setMsg) {
     .catch((err) => setMsg(err.response.data));
 }
 
+export async function loginAccount(loginData) {
+
+}
 
 export async function postEvent(eventData, eventList, setEventList) {
     axios.post('http://localhost:3000/event/create', {
