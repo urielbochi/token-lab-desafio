@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Calendar.css";
 import FullCalendar from "@fullcalendar/react";
 import daygridPlugin from "@fullcalendar/daygrid";
@@ -6,9 +6,29 @@ import interactionPlugin from "@fullcalendar/interaction";
 import CreateEvent from "../CreateEventModal/CreateEvent";
 import ViewEventModal from "../ViewEventModal/EditEvent";
 import { MyContext } from "../Context/Context";
+import { getEvents } from "../Services/fetchAPI";
 
 function Calendar() {
-  const { calendarClick, eventClick, eventList } = useContext(MyContext)
+  const { calendarClick, eventClick, eventList, setEventList } =
+    useContext(MyContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getEvents(1, setEventList);
+    };
+    fetchData()
+  }, []);
+
+  if (!eventList || eventList === []) {
+    return(
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
+  console.log(eventList)
+
   return (
     <div>
       <div style={{ position: "relative", zIndex: 0 }}>
@@ -23,9 +43,8 @@ function Calendar() {
           })}
         />
       </div>
-      <CreateEvent/>
-      <ViewEventModal
-      />
+      <CreateEvent />
+      <ViewEventModal />
     </div>
   );
 }
