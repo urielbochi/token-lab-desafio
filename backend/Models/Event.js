@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("./connection");
 
-
 const Event = sequelize.define(
   "Event",
   {
@@ -21,8 +20,8 @@ const Event = sequelize.define(
       type: DataTypes.STRING,
     },
     userId: {
-      type: DataTypes.INTEGER
-    }
+      type: DataTypes.INTEGER,
+    },
   },
   {
     timestamps: false,

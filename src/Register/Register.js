@@ -68,6 +68,7 @@ function Register() {
             </span>
             <input
               onChange={(e) => handleLoginChange(e)}
+              name="confirmPassword"
               type="password"
               className="input__style reg__retype"
               required

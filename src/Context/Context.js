@@ -21,6 +21,7 @@ export default function ContextProvider({ children }) {
     username: '',
     email: '',
     password: '',
+    confirmPassword: ''
   }
   const [loginInfo, setLoginInfo] = useState(loginHolder)
 

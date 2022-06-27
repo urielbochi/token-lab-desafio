@@ -7,6 +7,7 @@ export async function registerAccount(loginData, msg, setMsg) {
       name: loginData.username,
       email: loginData.email,
       password: loginData.password,
+      confirmPassword: loginData.confirmPassword
     })
     .then((response) => {
         console.log(response.data)
