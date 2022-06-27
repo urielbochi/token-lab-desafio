@@ -14,10 +14,9 @@ exports.create = async (req, res) => {
 };
 
 exports.getUserEvent = async (req, res) => {
-  const userHash = req.params.id;
   const userEvent = await Event.findAll({
     where: {
-      userId: userHash,
+      userId: req.params.id,
     },
   });
   res.json(userEvent);

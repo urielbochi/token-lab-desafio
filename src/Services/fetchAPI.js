@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export async function postLogin(loginData) {
+
+export async function registerAccount(loginData) {
   axios
     .post("http://localhost:3000/register", {
       name: loginData.name,

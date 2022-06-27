@@ -3,7 +3,6 @@ import "./Login.css";
 import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
 import { useNavigate } from "react-router-dom";
-import { postLogin } from "../Services/fetchAPI";
 
 function Login() {
   const nav = useNavigate();
@@ -34,10 +33,6 @@ function Login() {
           <p className="font__subtitle  font__desert login__subtitle">Sign in to your account</p>
         </div>
         <div className="login__login-input-field">
-          <span className="text__align-left font__artisa">Name</span>
-          <input name="name" onChange={handleLoginChange} className="input__style" required />
-        </div>
-        <div className="login__login-input-field">
           <span className="text__align-left font__artisa">Email</span>
           <input name="email" onChange={handleLoginChange} className="input__style" required />
         </div>
@@ -54,7 +49,6 @@ function Login() {
         </div>
         <button
           className="color__white button__signup font__magnolia"
-          onClick={() => postLogin(loginInfo)}
         >
           Sign in
         </button>
