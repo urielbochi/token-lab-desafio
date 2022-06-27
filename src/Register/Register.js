@@ -87,7 +87,7 @@ function Register() {
             type="submit"
             className="background__black color__white button__signup reg__sign-up"
             onClick={() => {
-              registerAccount(loginInfo, msg, setMsg);
+              registerAccount(loginInfo, setMsg);
             }}
           >
             Sign up

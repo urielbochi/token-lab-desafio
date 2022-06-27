@@ -1,13 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../Context/Context";
+import { loginAccount } from "../Services/fetchAPI";
+import { getUser } from "../Services/fetchAPI";
 
 function Login() {
   const nav = useNavigate();
   const { loginInfo, handleLoginChange } = useContext(MyContext);
+  const [msg, setMsg] = useState("");
+  const [authToken, setAuthToken] = useState("");
+  const [status, setStatus] = useState(0)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const user = await getUser(authToken)
+    };
+
+    if(status === 200) {
+      fetchData() 
+    }
+  },[status])
 
   return (
     <div className="login__background login__container">
@@ -21,6 +36,14 @@ function Login() {
             Sign in to your account
           </p>
         </div>
+        {msg.error && (
+          <div
+            class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            role="alert"
+          >
+            <span class="font-medium">Error!</span> {msg.error}
+          </div>
+        )}
         <div className="login__login-input-field">
           <span className="text__align-left font__artisa">Email</span>
           <input
@@ -53,7 +76,12 @@ function Login() {
             src={Facebook}
           />
         </div>
-        <button className="color__white button__signup font__magnolia">
+        <button
+         onClick={() => {
+          loginAccount(loginInfo, setMsg, setAuthToken, setStatus)
+        }}
+          className="color__white button__signup font__magnolia"
+        >
           Sign in
         </button>
         <p className="font__desert" onClick={() => nav("/forgot-password")}>
