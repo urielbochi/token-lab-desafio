@@ -31,9 +31,10 @@ exports.getUserEvent = async (req, res) => {
 };
 
 exports.deleteEvent = async (req, res) => {
+  const id = Number(req.body.id);
   const userEvent = await Event.destroy({
     where: {
-      title: req.body.title,
+      id: id,
     },
   });
 
@@ -42,7 +43,6 @@ exports.deleteEvent = async (req, res) => {
 
 exports.editEvent = async (req, res) => {
   const id = Number(req.body.id);
-  console.log(req.body.id, typeof req.body.id);
   const userEvent = await Event.update(
     {
       title: req.body.title,

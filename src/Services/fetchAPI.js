@@ -15,11 +15,11 @@ export async function registerAccount(loginData, setMsg) {
     .catch((err) => setMsg(err.response.data));
 }
 
-export async function loginAccount(loginData, setMsg, setStatus) {
+export async function loginAccount(loginInput, setMsg, setStatus) {
   axios
     .post("http://localhost:3000/login", {
-      email: loginData.email,
-      password: loginData.password,
+      email: loginInput.email,
+      password: loginInput.password,
     })
     .then((response) => {
       localStorage.setItem(

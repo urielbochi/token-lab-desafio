@@ -12,17 +12,17 @@ import { useNavigate } from "react-router-dom";
 function Calendar() {
   const { calendarClick, eventClick, eventList, setEventList } =
     useContext(MyContext);
+  const userToken = JSON.parse(localStorage.getItem("userToken"));
 
   const [userIdData, setUserIdData] = useState();
   const nav = useNavigate();
 
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("userToken"));
-    const recieve = async () => {
+    const getUserIdData = async () => {
       const user = await getUser(setUserIdData, userToken);
     };
 
-    recieve();
+    getUserIdData();
   }, []);
 
   useEffect(() => {
@@ -33,9 +33,7 @@ function Calendar() {
     fetchData();
   }, [userIdData]);
 
-  if (!eventList || eventList === []) {
-    return <div>Loading...</div>;
-  }
+  
   return (
     <div>
       <div style={{ position: "relative", zIndex: 0 }}>

@@ -29,12 +29,9 @@ function Login() {
       await loginAccount(
         loginInfo,
         setMsg,
-        setAuthToken,
         setStatus,
-        setCookie,
-        authToken
       );
-      nav("/calendar");
+       nav("/calendar")
     } catch {
       console.log("Failed to sign in");
     }
