@@ -7,7 +7,9 @@ import { deleteEvent } from "../Services/EventHandler";
 function ViewEventModal({}) {
   const {
     eventList,
+    setEventList,
     eventModal,
+    setEventModal,
     exitEventModal,
     openEdit,
     eventTitle,
@@ -15,6 +17,14 @@ function ViewEventModal({}) {
     eventClickId,
   } = useContext(MyContext);
 
+  const frontDeleteEvent = (eventClickId) => {
+    const newData = [...eventList];
+    const findIndex = newData.findIndex((item) => item.id === eventClickId);
+    newData.splice(findIndex, 1);
+    setEventList(newData);
+  };
+  
+  console.log(eventList)
   return (
     <div>
       <Modal
@@ -42,7 +52,13 @@ function ViewEventModal({}) {
                 <h3 className="text-center font__desert font-black">Término</h3>
                 <h3 className="text-center">{item.et}h</h3>
                 <button onClick={() => openEdit()}>Editar</button>
-                <button onClick={() => deleteEvent(eventClickId)}>
+                <button
+                  onClick={() => {
+                    deleteEvent(eventClickId);
+                    frontDeleteEvent(eventClickId);
+                    setEventModal(false)
+                  }}
+                >
                   Remover
                 </button>
               </div>

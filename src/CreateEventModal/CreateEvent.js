@@ -27,6 +27,7 @@ function CreateEvent({ userTokenId }) {
       id: eventClickId,
     });
   };
+
   return (
     <div>
       <Modal
