@@ -3,12 +3,12 @@ import "./Login.css";
 import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
 import { Navigate, useNavigate } from "react-router-dom";
-import { MyContext } from "../Context/Context";
+import { AuthContext } from "../Context/Context";
 import { loginAccount } from "../Services/UserHandler";
 
 function Login() {
   const nav = useNavigate();
-  const { loginInfo, handleLoginChange } = useContext(MyContext);
+  const { loginInfo, handleLoginChange } = useContext(AuthContext);
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState(0);
   const recoverUserToken = JSON.parse(localStorage.getItem("userToken"));

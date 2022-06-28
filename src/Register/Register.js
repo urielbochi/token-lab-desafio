@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 import { registerAccount } from "../Services/UserHandler";
-import { MyContext } from "../Context/Context";
+import { AuthContext } from "../Context/Context";
 
 function Register() {
   const nav = useNavigate();
-  const { loginInfo, handleLoginChange } = useContext(MyContext);
+  const { loginInfo, handleLoginChange } = useContext(AuthContext);
   const [msg, setMsg] = useState("");
 
   return (

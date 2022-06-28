@@ -5,15 +5,15 @@ import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import CreateEvent from "../CreateEventModal/CreateEvent";
 import ViewEventModal from "../ViewEventModal/EditEvent";
-import { MyContext } from "../Context/Context";
 import { getUser } from "../Services/UserHandler";
 import { getEvents } from "../Services/EventHandler";
 import { useNavigate } from "react-router-dom";
 import CalendarHeader from "../CalendarHeader/Header";
+import { EventContext } from '../Context/EventContext'
 
 function Calendar() {
   const { calendarClick, eventClick, eventList, setEventList } =
-    useContext(MyContext);
+    useContext(EventContext);
   const userToken = JSON.parse(localStorage.getItem("userToken"));
 
   const nav = useNavigate();

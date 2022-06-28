@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
-import { MyContext } from "../Context/Context";
+import { EventContext } from "../Context/EventContext";
 import { postEvent } from "../Services/EventHandler";
 import { editEvent } from "../Services/EventHandler";
 
@@ -16,7 +16,7 @@ function CreateEvent({ userTokenId }) {
     dataPicker,
     editButtonClicked,
     eventClickId,
-  } = useContext(MyContext);
+  } = useContext(EventContext);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
+import { EventContext } from "../Context/EventContext";
 import CreateEvent from "../CreateEventModal/CreateEvent";
-import { MyContext } from "../Context/Context";
 import { deleteEvent } from "../Services/EventHandler";
 
 function ViewEventModal({}) {
@@ -12,10 +12,9 @@ function ViewEventModal({}) {
     setEventModal,
     exitEventModal,
     openEdit,
-    eventTitle,
     editButtonClicked,
     eventClickId,
-  } = useContext(MyContext);
+  } = useContext(EventContext);
 
   // const frontDeleteEvent = (eventClickId) => {
   //   const newData = [...eventList];

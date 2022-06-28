@@ -1,30 +1,8 @@
 import React, { createContext, useState } from "react";
 
-export const MyContext = createContext();
+export const AuthContext = createContext();
 
-export default function ContextProvider({ children }) {
-  const [dataPicker, setDataPicker] = useState("");
-
-  const [calendarModal, setCalendarModal] = useState(false);
-  const [eventModal, setEventModal] = useState(false);
-
-  const [eventTitle, setEventTitle] = useState("");
-
-  const [eventDateHolder, setEventDateHolder] = useState();
-  const [eventClickId, setEventClickId] = useState();
-  const eventHolder = {
-    title: "",
-    description: "",
-    date: dataPicker,
-    id: parseInt(eventClickId),
-    st: "",
-    et: "",
-  };
-  const [eventInput, setEventInput] = useState(eventHolder);
-  const [eventList, setEventList] = useState([]);
-
-  const [editButtonClicked, setEditButtonClicked] = useState(false);
-
+export default function AuthProvider({ children }) {
   const loginHolder = {
     username: "",
     email: "",
@@ -42,84 +20,17 @@ export default function ContextProvider({ children }) {
     });
   };
 
-  const calendarClick = (target) => {
-    setDataPicker(target.dateStr);
-    setCalendarModal(true);
-  };
-
-  const eventClick = (clickInfo) => {
-    setEventModal(true);
-    setEventTitle(clickInfo.event.title);
-    setEventDateHolder(clickInfo.event.date);
-    setEventClickId(clickInfo.event._def.publicId);
-  };
-
-  const exitCalendarModal = () => {
-    setCalendarModal(false);
-    setEventModal(false);
-    setEditButtonClicked(false);
-  };
-
-  const exitEventModal = () => {
-    setEventModal(false);
-    setEditButtonClicked(false);
-  };
-
-  // Edit dependencies (ViewEvent)
-  const openEdit = () => {
-    setEditButtonClicked(true);
-    setEventModal(false);
-    setCalendarModal(true);
-  };
-
   return (
-    <MyContext.Provider
+    <AuthContext.Provider
       value={{
-
-        dataPicker,
-        setDataPicker,
-
-        calendarClick,
-
-        eventInput,
-        setEventInput,
-
-        eventList,
-        setEventList,
-
-        eventTitle,
-        setEventTitle,
-
-        calendarModal,
-        setCalendarModal,
-
-        eventModal,
-        exitCalendarModal,
-
-        editButtonClicked,
-        exitEventModal,
-
         userAuthId,
         setUserAuthId,
-
-        eventClick,
-        setEventModal,
-
-        openEdit,
-        setEditButtonClicked,
-
         loginInfo,
         setLoginInfo,
         handleLoginChange,
-
-        setEventDateHolder,
-        eventDateHolder,
-
-        eventClickId,
-        setEventClickId,
       }}
     >
       {children}
-    </MyContext.Provider>
+    </AuthContext.Provider>
   );
 }

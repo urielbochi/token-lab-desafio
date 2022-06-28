@@ -1,7 +1,8 @@
 import "./App.css";
 import MainRoutes from "./Routes/Routes";
-import ContextProvider from "./Context/Context";
+import AuthProvider from "./Context/Context";
 import Modal from "react-modal";
+import EventProvider from "./Context/EventContext";
 
 
 function App() {
@@ -9,9 +10,11 @@ function App() {
 
   return (
     <div>
-      <ContextProvider>
+      <AuthProvider>
+        <EventProvider>
           <MainRoutes />
-      </ContextProvider>
+          </EventProvider>
+      </AuthProvider>
     </div>
   );
 }
