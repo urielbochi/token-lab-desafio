@@ -17,10 +17,15 @@ function ViewEventModal({}) {
     eventClickId,
   } = useContext(MyContext);
 
-  const frontDeleteEvent = (eventClickId) => {
-    const newData = [...eventList];
-    const findIndex = newData.findIndex((item) => item.id === eventClickId);
-    newData.splice(findIndex, 1);
+  // const frontDeleteEvent = (eventClickId) => {
+  //   const newData = [...eventList];
+  //   const findIndex = newData.findIndex((item) => item.id === eventClickId);
+  //   newData.splice(findIndex, 1);
+  //   setEventList(newData);
+  // };
+
+    const frontDeleteEvent = (eventClickId) => {
+    const newData = eventList.filter((item) => parseInt(item.id) !== parseInt(eventClickId))
     setEventList(newData);
   };
   
