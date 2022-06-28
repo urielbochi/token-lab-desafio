@@ -54,7 +54,7 @@ function Login() {
           </div>
         )}
         <div className="login__login-input-field">
-          <span className="text__align-left font__artisa">Email</span>
+          <span className="text__align-left font__desert">Email</span>
           <input
             name="email"
             className="input__style"
@@ -63,7 +63,7 @@ function Login() {
           />
         </div>
         <div className="login__login-input-field">
-          <span className="text__align-left font__artisa">Password</span>
+          <span className="text__align-left font__desert">Password</span>
           <input
             name="password"
             type="password"
