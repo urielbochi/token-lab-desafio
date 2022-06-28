@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
 import { MyContext } from "../Context/Context";
 import { postEvent } from "../Services/fetchAPI";
-import { withCookies, Cookies } from "react-cookie";
-import { useCookies } from "react-cookie";
+import { editEvent } from "../Services/fetchAPI";
 
-function CreateEvent() {
+function CreateEvent({userTokenId}) {
   const {
     eventList,
     setEventList,
@@ -18,7 +17,8 @@ function CreateEvent() {
     editButtonClicked,
     setEditButtonClicked,
     userAuthId,
-    cookies,
+    eventClickId,
+
   } = useContext(MyContext);
 
   const [userLsId, setUserLsId] = useState();
@@ -29,13 +29,13 @@ function CreateEvent() {
     setUserLsId(recoverUserIdFromLs);
   }, []);
 
-  const editEvent = () => {
-    const newData = [...eventList];
-    newData[0] = eventInput;
-    setEventList(newData);
-    setEditButtonClicked(false);
-    setDateModal(false);
-  };
+  // const editEvent = () => {
+  //   const newData = [...eventList];
+  //   newData[0] = eventInput;
+  //   setEventList(newData);
+  //   setEditButtonClicked(false);
+  //   setDateModal(false);
+  // };
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -43,11 +43,11 @@ function CreateEvent() {
       ...eventInput,
       [name]: value,
       date: dataPicker,
+      id: eventClickId,
     });
   };
 
-  const cookieId = cookies.userId
-
+  console.log(eventInput)
 
   return (
     <div>
@@ -123,7 +123,7 @@ function CreateEvent() {
           {!editButtonClicked && (
             <button
               onClick={() => {
-                postEvent(eventInput, eventList, setEventList, cookieId);
+                postEvent(eventInput, eventList, setEventList, userTokenId);
                 setDateModal(false);
                 setEventInput({});
               }}
@@ -138,7 +138,7 @@ function CreateEvent() {
         <div className="flex justify-center">
           {editButtonClicked && (
             <button
-              onClick={() => editEvent()}
+              onClick={() => editEvent(eventInput, eventList, setEventList, eventClickId)}
               class="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
             >
               <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">

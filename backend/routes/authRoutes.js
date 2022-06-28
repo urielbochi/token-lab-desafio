@@ -5,7 +5,7 @@ const cors = require("cors");
 const authController = require("../controller/authController");
 const authGuard = require("../middleware/auth");
 const validate = require("../utils/validate");
-const middleware = require('../middleware/auth')
+const middleware = require("../middleware/auth");
 
 router.post("/register", cors(), validate("register"), authController.register);
 router.post("/login", cors(), validate("login"), authController.login);

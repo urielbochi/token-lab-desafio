@@ -15,16 +15,17 @@ function Login() {
   const [msg, setMsg] = useState("");
   const [authToken, setAuthToken] = useState("");
   const [status, setStatus] = useState(0);
+  const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const user = await getUser(authToken, setUserAuthId, setCookie);
-    };
+    const recoverUserToken = JSON.parse(localStorage.getItem("userToken"));
 
-    if (status === 200) {
-      fetchData();
+    if (recoverUserToken) {
+      nav('/calendar')
     }
-  }, [status]);
+
+  }, []);
+
   return (
     <div className="login__background login__container">
       <h1 className="color__white font__magnolia font__title mb-5">
@@ -102,7 +103,6 @@ function Login() {
           </b>
         </p>
       </div>
-      {userAuthId >= 1 && nav("/calendar")}
     </div>
   );
 }

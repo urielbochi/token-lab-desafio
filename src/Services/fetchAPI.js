@@ -15,19 +15,17 @@ export async function registerAccount(loginData, setMsg) {
     .catch((err) => setMsg(err.response.data));
 }
 
-export async function loginAccount(
-  loginData,
-  setMsg,
-  setAuthToken,
-  setStatus,
-) {
+export async function loginAccount(loginData, setMsg, setStatus) {
   axios
     .post("http://localhost:3000/login", {
       email: loginData.email,
       password: loginData.password,
     })
     .then((response) => {
-      setAuthToken(response.data.access_token);
+      localStorage.setItem(
+        "userToken",
+        JSON.stringify(response.data.access_token)
+      );
       setStatus(response.status);
       console.log(response);
     })
@@ -37,14 +35,12 @@ export async function loginAccount(
     });
 }
 
-export async function getUser(authToken, setUserAuthId, setCookie) {
-  const AuthStr = "Bearer ".concat(authToken);
+export async function getUser(setUserIdData, userToken) {
+  const AuthStr = "Bearer ".concat(userToken);
   axios
     .get("http://localhost:3000/user", { headers: { Authorization: AuthStr } })
     .then((response) => {
-      setCookie("userId", response.data.id);
-      //   localStorage.setItem("userId", JSON.stringify(response.data.id))
-      setUserAuthId(response.data.id);
+      setUserIdData(response.data.id);
     })
     .catch((error) => {
       console.log("error " + error);
@@ -61,7 +57,12 @@ export async function getEvents(userId, setEventList) {
     .catch((err) => console.log(err));
 }
 
-export async function postEvent(eventData, eventList, setEventList, cookieId) {
+export async function postEvent(
+  eventData,
+  eventList,
+  setEventList,
+  userTokenId
+) {
   axios
     .post("http://localhost:3000/event/create", {
       title: eventData.title,
@@ -69,11 +70,36 @@ export async function postEvent(eventData, eventList, setEventList, cookieId) {
       date: eventData.date,
       startTime: eventData.stTime,
       endTime: eventData.edTime,
-      userId: cookieId,
+      userId: userTokenId,
     })
     .then((response) => {
       setEventList([...eventList, response.data]);
-      console.log(response)
+      console.log(response);
     })
     .catch((err) => console.log(err));
+}
+
+export async function editEvent(
+  eventData,
+  eventList,
+  setEventList,
+  userTokenId,
+  eventClickId
+) {
+  axios
+    .patch(`http://localhost:3000/event/edit/`, {
+      title: eventData.title,
+      description: eventData.description,
+      date: eventData.date,
+      st: eventData.stTime,
+      et: eventData.edTime,
+      id: eventData.id,
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((err) => {
+      console.log(err);
+      console.log(eventData);
+    });
 }
