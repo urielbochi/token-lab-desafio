@@ -79,13 +79,7 @@ export async function postEvent(
     .catch((err) => console.log(err));
 }
 
-export async function editEvent(
-  eventData,
-  eventList,
-  setEventList,
-  userTokenId,
-  eventClickId
-) {
+export async function editEvent(eventData) {
   axios
     .patch(`http://localhost:3000/event/edit/`, {
       title: eventData.title,
@@ -96,7 +90,7 @@ export async function editEvent(
       id: eventData.id,
     })
     .then((response) => {
-      console.log(response)
+      console.log(response);
     })
     .catch((err) => {
       console.log(err);

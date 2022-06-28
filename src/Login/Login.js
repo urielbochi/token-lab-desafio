@@ -5,8 +5,6 @@ import Google from "../Images/Google.png";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../Context/Context";
 import { loginAccount } from "../Services/fetchAPI";
-import { getUser } from "../Services/fetchAPI";
-import { useCookies } from "react-cookie";
 
 function Login() {
   const nav = useNavigate();
@@ -15,23 +13,39 @@ function Login() {
   const [msg, setMsg] = useState("");
   const [authToken, setAuthToken] = useState("");
   const [status, setStatus] = useState(0);
-  const [auth, setAuth] = useState(false);
 
   useEffect(() => {
     const recoverUserToken = JSON.parse(localStorage.getItem("userToken"));
 
     if (recoverUserToken) {
-      nav('/calendar')
+      nav("/calendar");
     }
-
   }, []);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      await loginAccount(
+        loginInfo,
+        setMsg,
+        setAuthToken,
+        setStatus,
+        setCookie,
+        authToken
+      );
+      nav("/calendar");
+    } catch {
+      console.log("Failed to sign in");
+    }
+  }
 
   return (
     <div className="login__background login__container">
       <h1 className="color__white font__magnolia font__title mb-5">
         TokenLab Calendar
       </h1>
-      <div className="login__white-box">
+      <form onSubmit={(e) => handleSubmit(e)} className="login__white-box">
         <div>
           <h1 className="font__artisa title__size">Welcome back!</h1>
           <p className="font__subtitle  font__desert login__subtitle">
@@ -78,19 +92,7 @@ function Login() {
             src={Facebook}
           />
         </div>
-        <button
-          onClick={() => {
-            loginAccount(
-              loginInfo,
-              setMsg,
-              setAuthToken,
-              setStatus,
-              setCookie,
-              authToken
-            );
-          }}
-          className="color__white button__signup font__magnolia"
-        >
+        <button className="color__white button__signup font__magnolia">
           Sign in
         </button>
         <p className="font__desert" onClick={() => nav("/forgot-password")}>
@@ -102,7 +104,7 @@ function Login() {
             Register now
           </b>
         </p>
-      </div>
+      </form>
     </div>
   );
 }
