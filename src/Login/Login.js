@@ -20,7 +20,8 @@ function Login() {
     }
   },[recoverUserToken])
 
-  async function handleSubmit(e) {
+  async function
+   handleSubmit(e) {
     e.preventDefault();
 
     try {
@@ -32,8 +33,9 @@ function Login() {
   }
 
   return (
-    <div className="login__background login__container">
-      <h1 className="color__white font__magnolia font__title mb-5">
+    <div className="login__background" >
+      <div className="login__container">
+      <h1 className="color__white font__magnolia font__title mb-5 tklab__title">
         TokenLab Calendar
       </h1>
       <form onSubmit={(e) => handleSubmit(e)} className="login__white-box">
@@ -96,6 +98,7 @@ function Login() {
           </b>
         </p>
       </form>
+      </div>
     </div>
   );
 }

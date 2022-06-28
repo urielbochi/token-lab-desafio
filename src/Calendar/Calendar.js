@@ -41,7 +41,6 @@ function Calendar() {
 
   return (
     <div>
-      <h1>Oiiiiii</h1>
       <CalendarHeader />
       <div style={{ position: "relative", zIndex: 0 }}>
         <FullCalendar
