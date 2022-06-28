@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS events(
 title VARCHAR(250) NOT NULL,
 date VARCHAR(250) NOT NULL,
 description VARCHAR(250) NOT NULL,
-st VARCHAR(4),
-et VARCHAR(4),
+st VARCHAR(10),
+et VARCHAR(10),
 userId integer,
 FOREIGN KEY(`userId`)
 REFERENCES `users` (`id`)

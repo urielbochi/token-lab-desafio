@@ -38,9 +38,9 @@ function ViewEventModal({}) {
                 </h3>
                 <h3 className="mb-5 text-center">{item.description}</h3>
                 <h3 className="text-center font__desert font-black">Inicio</h3>
-                <h3 className="mb-5 text-center">{item.stTime}h</h3>
+                <h3 className="mb-5 text-center">{item.st}h</h3>
                 <h3 className="text-center font__desert font-black">Término</h3>
-                <h3 className="text-center">{item.edTime}h</h3>
+                <h3 className="text-center">{item.et}h</h3>
                 <button onClick={() => openEdit()}>Editar</button>
                 <button onClick={() => deleteEvent(eventClickId)}>
                   Remover

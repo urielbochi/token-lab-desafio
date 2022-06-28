@@ -54,8 +54,6 @@ export default function ContextProvider({ children }) {
     setEventClickId(clickInfo.event._def.publicId);
   };
 
-  console.log(eventClickId)
-
   const exitCalendarModal = () => {
     setCalendarModal(false);
     setEventModal(false);

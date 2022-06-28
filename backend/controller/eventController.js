@@ -13,8 +13,8 @@ exports.create = async (req, res) => {
       title: req.body.title,
       date: req.body.date,
       description: req.body.description,
-      st: req.body.startTime,
-      et: req.body.endTime,
+      st: req.body.st,
+      et: req.body.et,
       userId: req.body.userId,
     });
     return res.json(createEvent);

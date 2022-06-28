@@ -14,12 +14,12 @@ import CalendarHeader from "../CalendarHeader/Header";
 function Calendar() {
   const { calendarClick, eventClick, eventList, setEventList } =
     useContext(MyContext);
-  const userToken = JSON.parse(localStorage.getItem("userToken"));
 
   const [userIdData, setUserIdData] = useState();
   const nav = useNavigate();
 
   useEffect(() => {
+    const userToken = JSON.parse(localStorage.getItem("userToken"));
     const getUserIdData = async () => {
       const user = await getUser(setUserIdData, userToken);
     };
@@ -38,7 +38,7 @@ function Calendar() {
   return (
     <div>
       <h1>Oiiiiii</h1>
-      <CalendarHeader/>
+      <CalendarHeader />
       <div style={{ position: "relative", zIndex: 0 }}>
         <FullCalendar
           className="calendar-set"

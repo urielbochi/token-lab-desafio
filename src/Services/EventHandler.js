@@ -21,13 +21,20 @@ export async function postEvent(
       title: eventData.title,
       description: eventData.description,
       date: eventData.date,
-      startTime: eventData.stTime,
-      endTime: eventData.edTime,
+      st: eventData.st,
+      et: eventData.et,
       userId: userTokenId,
     })
     .then((response) => {
       setEventList([...eventList, response.data]);
-      console.log(response);
+      console.log({
+        title: eventData.title,
+        description: eventData.description,
+        date: eventData.date,
+        st: eventData.st,
+        et: eventData.et,
+        userId: userTokenId,
+      });
     })
     .catch((err) => console.log(err));
 }
@@ -38,8 +45,8 @@ export async function editEvent(eventData) {
       title: eventData.title,
       description: eventData.description,
       date: eventData.date,
-      st: eventData.stTime,
-      et: eventData.edTime,
+      st: eventData.st,
+      et: eventData.et,
       id: eventData.id,
     })
     .then((response) => {

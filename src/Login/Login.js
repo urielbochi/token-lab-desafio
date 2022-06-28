@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { MyContext } from "../Context/Context";
 import { loginAccount } from "../Services/UserHandler";
 
@@ -11,21 +11,21 @@ function Login() {
   const { loginInfo, handleLoginChange } = useContext(MyContext);
   const [msg, setMsg] = useState("");
   const [status, setStatus] = useState(0);
+  const recoverUserToken = JSON.parse(localStorage.getItem("userToken"));
+  const [loginButtonClicked, setLoginButtonClicked] = useState(false)
 
   useEffect(() => {
-    const recoverUserToken = JSON.parse(localStorage.getItem("userToken"));
-
-    if (recoverUserToken) {
-      nav("/calendar");
+    if (recoverUserToken && loginButtonClicked ) {
+      nav('/calendar')
     }
-  }, []);
+  },[recoverUserToken])
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
       await loginAccount(loginInfo, setMsg, setStatus);
-      nav("/calendar");
+      setLoginButtonClicked(true)
     } catch {
       console.log("Failed to sign in");
     }
