@@ -10,12 +10,10 @@ function ViewEventModal({}) {
     eventModal,
     exitEventModal,
     openEdit,
-    eventTitleHolder,
+    eventTitle,
     editButtonClicked,
     eventClickId,
   } = useContext(MyContext);
-
-  useEffect(() => {}, [editButtonClicked]);
 
   return (
     <div>
@@ -26,7 +24,7 @@ function ViewEventModal({}) {
       >
         {eventList.map(
           (item) =>
-            item.title === eventTitleHolder && (
+            item.id === parseInt(eventClickId) && (
               <div>
                 <h1 className="font__desert text-5xl mb-5 text-center">
                   Evento agendado
