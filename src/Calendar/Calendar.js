@@ -14,15 +14,19 @@ import CalendarHeader from "../CalendarHeader/Header";
 function Calendar() {
   const { calendarClick, eventClick, eventList, setEventList } =
     useContext(MyContext);
+  const userToken = JSON.parse(localStorage.getItem("userToken"));
 
-  const [userIdData, setUserIdData] = useState();
   const nav = useNavigate();
+  const [userIdData, setUserIdData] = useState();
 
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("userToken"));
     const getUserIdData = async () => {
       const user = await getUser(setUserIdData, userToken);
     };
+
+    if (!userIdData && !userToken) {
+      nav("/login");
+    }
 
     getUserIdData();
   }, []);
