@@ -6,8 +6,10 @@ import interactionPlugin from "@fullcalendar/interaction";
 import CreateEvent from "../CreateEventModal/CreateEvent";
 import ViewEventModal from "../ViewEventModal/EditEvent";
 import { MyContext } from "../Context/Context";
-import { getEvents, getUser } from "../Services/fetchAPI";
+import { getUser } from "../Services/UserHandler";
+import { getEvents } from "../Services/EventHandler";
 import { useNavigate } from "react-router-dom";
+import CalendarHeader from "../CalendarHeader/Header";
 
 function Calendar() {
   const { calendarClick, eventClick, eventList, setEventList } =
@@ -33,9 +35,10 @@ function Calendar() {
     fetchData();
   }, [userIdData]);
 
-  
   return (
     <div>
+      <h1>Oiiiiii</h1>
+      <CalendarHeader/>
       <div style={{ position: "relative", zIndex: 0 }}>
         <FullCalendar
           className="calendar-set"

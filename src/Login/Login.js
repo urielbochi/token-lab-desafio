@@ -4,14 +4,12 @@ import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../Context/Context";
-import { loginAccount } from "../Services/fetchAPI";
+import { loginAccount } from "../Services/UserHandler";
 
 function Login() {
   const nav = useNavigate();
-  const { loginInfo, handleLoginChange, userAuthId, setUserAuthId, setCookie } =
-    useContext(MyContext);
+  const { loginInfo, handleLoginChange } = useContext(MyContext);
   const [msg, setMsg] = useState("");
-  const [authToken, setAuthToken] = useState("");
   const [status, setStatus] = useState(0);
 
   useEffect(() => {
@@ -26,12 +24,8 @@ function Login() {
     e.preventDefault();
 
     try {
-      await loginAccount(
-        loginInfo,
-        setMsg,
-        setStatus,
-      );
-       nav("/calendar")
+      await loginAccount(loginInfo, setMsg, setStatus);
+      nav("/calendar");
     } catch {
       console.log("Failed to sign in");
     }

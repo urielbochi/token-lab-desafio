@@ -31,7 +31,7 @@ exports.getUserEvent = async (req, res) => {
 };
 
 exports.deleteEvent = async (req, res) => {
-  const id = Number(req.body.id);
+  const id = Number(req.params.id);
   const userEvent = await Event.destroy({
     where: {
       id: id,
@@ -40,6 +40,7 @@ exports.deleteEvent = async (req, res) => {
 
   res.json(userEvent);
 };
+
 
 exports.editEvent = async (req, res) => {
   const id = Number(req.body.id);

@@ -4,7 +4,8 @@ export const MyContext = createContext();
 
 export default function ContextProvider({ children }) {
   const [dataPicker, setDataPicker] = useState("");
-  const [dateModal, setDateModal] = useState(false);
+  
+  const [calendarModal, setCalendarModal] = useState(false);
   const [eventModal, setEventModal] = useState(false);
   
   const [eventTitleHolder, setEventTitleHolder] = useState("");
@@ -20,7 +21,6 @@ export default function ContextProvider({ children }) {
   };
   const [eventInput, setEventInput] = useState(eventHolder);
   const [eventList, setEventList] = useState([]);
-  
   
   const [editButtonClicked, setEditButtonClicked] = useState(false);
   
@@ -43,7 +43,7 @@ export default function ContextProvider({ children }) {
 
   const calendarClick = (target) => {
     setDataPicker(target.dateStr);
-    setDateModal(true);
+    setCalendarModal(true);
   };
 
   const eventClick = (clickInfo) => {
@@ -53,19 +53,22 @@ export default function ContextProvider({ children }) {
     setEventClickId(clickInfo.event._def.publicId)
   };
   
-  const exitModal = () => {
-    setDateModal(false);
+  const exitCalendarModal = () => {
+    setCalendarModal(false);
+    setEventModal(false);
+    setEditButtonClicked(false)
   };
 
   const exitEventModal = () => {
     setEventModal(false);
+    setEditButtonClicked(false)
   };
 
   // Edit dependencies (ViewEvent)
   const openEdit = () => {
     setEditButtonClicked(true);
     setEventModal(false);
-    setDateModal(true);
+    setCalendarModal(true);
   };
 
   return (
@@ -80,10 +83,10 @@ export default function ContextProvider({ children }) {
         setEventList,
         eventTitleHolder,
         setEventTitleHolder,
-        dateModal,
-        setDateModal,
+        calendarModal,
+        setCalendarModal,
         eventModal,
-        exitModal,
+        exitCalendarModal,
         editButtonClicked,
         exitEventModal,
         eventClick,

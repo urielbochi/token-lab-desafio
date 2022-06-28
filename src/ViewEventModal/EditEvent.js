@@ -1,27 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Modal from "react-modal";
 import CreateEvent from "../CreateEventModal/CreateEvent";
 import { MyContext } from "../Context/Context";
+import { deleteEvent } from "../Services/EventHandler";
 
 function ViewEventModal({}) {
   const {
     eventList,
-    setEventList,
     eventModal,
-    setEventModal,
     exitEventModal,
     openEdit,
     eventTitleHolder,
     editButtonClicked,
+    eventClickId,
   } = useContext(MyContext);
 
-  const removeEvent = (id) => {
-    const newData = [...eventList];
-    newData.splice(id, 1);
-    setEventList(newData);
-    setEventModal(false);
-  };
-
+  useEffect(() => {}, [editButtonClicked]);
 
   return (
     <div>
@@ -31,7 +25,7 @@ function ViewEventModal({}) {
         onRequestClose={exitEventModal}
       >
         {eventList.map(
-          (item, index) =>
+          (item) =>
             item.title === eventTitleHolder && (
               <div>
                 <h1 className="font__desert text-5xl mb-5 text-center">
@@ -50,7 +44,9 @@ function ViewEventModal({}) {
                 <h3 className="text-center font__desert font-black">Término</h3>
                 <h3 className="text-center">{item.edTime}h</h3>
                 <button onClick={() => openEdit()}>Editar</button>
-                <button onClick={() => removeEvent(index)}>Remover</button>
+                <button onClick={() => deleteEvent(eventClickId)}>
+                  Remover
+                </button>
               </div>
             )
         )}

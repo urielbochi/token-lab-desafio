@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
-import { registerAccount } from "../Services/fetchAPI";
+import { registerAccount } from "../Services/UserHandler";
 import { MyContext } from "../Context/Context";
 
 function Register() {
