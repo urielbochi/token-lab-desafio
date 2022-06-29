@@ -5,7 +5,6 @@ export async function getEvents(userId, setEventList) {
     .get(`http://localhost:3000/event/list/${userId}`, {})
     .then((response) => {
       setEventList(response.data);
-      console.log(response.data);
     })
     .catch((err) => console.log(err));
 }
@@ -50,7 +49,14 @@ export async function editEvent(eventData) {
       id: eventData.id,
     })
     .then((response) => {
-      console.log(response);
+      console.log({
+        title: eventData.title,
+        description: eventData.description,
+        date: eventData.date,
+        st: eventData.st,
+        et: eventData.et,
+        id: eventData.id,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -60,7 +66,6 @@ export async function editEvent(eventData) {
 export async function deleteEvent(eventId) {
   axios
     .delete(`http://localhost:3000/event/delete/${eventId}`)
-    .then((response) => {
-    })
+    .then((response) => {})
     .catch((err) => console.log(err));
 }

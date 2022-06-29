@@ -9,19 +9,23 @@ import { getUser } from "../Services/UserHandler";
 import { getEvents } from "../Services/EventHandler";
 import { useNavigate } from "react-router-dom";
 import CalendarHeader from "../CalendarHeader/Header";
-import { EventContext } from '../Context/EventContext'
+import { EventContext } from "../Context/EventContext";
+import { AuthContext } from "../Context/Context";
 
 function Calendar() {
   const { calendarClick, eventClick, eventList, setEventList } =
     useContext(EventContext);
+
+  const { accountStatus, setAccountStatus } = useContext(AuthContext);
   const userToken = JSON.parse(localStorage.getItem("userToken"));
 
   const nav = useNavigate();
   const [userIdData, setUserIdData] = useState();
+  const [updater, setUpdater] = useState(0);
 
   useEffect(() => {
     const getUserIdData = async () => {
-      const user = await getUser(setUserIdData, userToken);
+      const user = await getUser(setUserIdData, userToken, setAccountStatus);
     };
 
     if (!userIdData && !userToken) {
@@ -32,16 +36,32 @@ function Calendar() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const recoverUserEvents = async () => {
       const data = await getEvents(userIdData, setEventList);
     };
-
-    fetchData();
+    recoverUserEvents();
   }, [userIdData]);
+
+  const logout = () => {
+    localStorage.removeItem("userToken");
+    nav("/login");
+    setAccountStatus("");
+  }
 
   return (
     <div>
       <CalendarHeader />
+      <div className="flex justify-center pl-5 mb-20">
+        <h1 className="text-xl px-8 font__desert hover:bg-sky-200">Account</h1>
+        <a
+          href="https://www.tokenlab.com.br/pt/about-us"
+          target="_blank"
+          className="text-xl px-8 font__desert hover:bg-sky-200"
+        >
+          About us
+        </a>
+        <h1 onClick={() => logout()} className="cursor-pointer px-8 text-xl font__desert hover:bg-sky-200">Logout</h1>
+      </div>
       <div style={{ position: "relative", zIndex: 0 }}>
         <FullCalendar
           className="calendar-set"

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Modal from "react-modal";
 import { EventContext } from "../Context/EventContext";
 import { postEvent } from "../Services/EventHandler";
@@ -29,11 +29,13 @@ function CreateEvent({ userTokenId }) {
   };
 
   const frontEditEvent = () => {
-    const newData = [...eventList]
-    const findIndex = newData.findIndex((item) => parseInt(item.id) === parseInt(eventClickId));
-    newData[findIndex] = eventInput
-    setEventList(newData)
-  }
+    const newData = [...eventList];
+    const findIndex = newData.findIndex(
+      (item) => parseInt(item.id) === parseInt(eventClickId)
+    );
+    newData[findIndex] = eventInput;
+    setEventList(newData);
+  };
 
   return (
     <div>
@@ -42,6 +44,17 @@ function CreateEvent({ userTokenId }) {
         isOpen={calendarModal}
         onRequestClose={exitCalendarModal}
       >
+        <div className="modal-close cursor-pointer flex justify-end" onClick={() => exitCalendarModal()}>
+          <svg
+            className="fill-current text-black"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+          >
+            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+          </svg>
+        </div>
         {editButtonClicked ? (
           <h1 className="h-11 text-center text-5xl mb-10 font__desert">
             Editar Evento
@@ -109,7 +122,13 @@ function CreateEvent({ userTokenId }) {
           {!editButtonClicked && (
             <button
               onClick={() => {
-                postEvent(eventInput, eventList, setEventList, userTokenId);
+                postEvent(
+                  eventInput,
+                  eventList,
+                  setEventList,
+                  userTokenId,
+                  dataPicker
+                );
                 setCalendarModal(false);
                 setEventInput({});
               }}
@@ -126,7 +145,7 @@ function CreateEvent({ userTokenId }) {
             <button
               onClick={() => {
                 editEvent(eventInput, eventList, setEventList, eventClickId);
-                frontEditEvent()
+                frontEditEvent();
               }}
               className="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
             >

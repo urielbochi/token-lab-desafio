@@ -11,6 +11,7 @@ export default function AuthProvider({ children }) {
   };
   const [loginInfo, setLoginInfo] = useState(loginHolder);
   const [userAuthId, setUserAuthId] = useState();
+  const [accountStatus, setAccountStatus] = useState('');
 
   const handleLoginChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +29,8 @@ export default function AuthProvider({ children }) {
         loginInfo,
         setLoginInfo,
         handleLoginChange,
+        accountStatus,
+        setAccountStatus
       }}
     >
       {children}

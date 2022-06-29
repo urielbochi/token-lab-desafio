@@ -35,14 +35,16 @@ export async function loginAccount(loginInput, setMsg, setStatus) {
     });
 }
 
-export async function getUser(setUserIdData, userToken) {
+export async function getUser(setUserIdData, userToken, setAccountStatus) {
   const AuthStr = "Bearer ".concat(userToken);
   axios
     .get("http://localhost:3000/user", { headers: { Authorization: AuthStr } })
     .then((response) => {
       setUserIdData(response.data.id);
-    })
+      setAccountStatus(response.status)
+    })  
     .catch((error) => {
-      console.log("error " + error);
+      console.log(error.response.status);
+      setAccountStatus(error.response.status)
     });
 }

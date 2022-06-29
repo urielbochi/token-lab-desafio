@@ -7,6 +7,12 @@ export default function EventProvider({ children }) {
   const [eventClickId, setEventClickId] = useState();
 
   const [eventList, setEventList] = useState([]);
+
+  const [calendarModal, setCalendarModal] = useState(false);
+  const [eventModal, setEventModal] = useState(false);
+
+  const [eventTitle, setEventTitle] = useState("");
+  const [editButtonClicked, setEditButtonClicked] = useState(false);
   const eventHolder = {
     title: "",
     description: "",
@@ -17,17 +23,12 @@ export default function EventProvider({ children }) {
   };
   const [eventInput, setEventInput] = useState(eventHolder);
 
-
-  const [calendarModal, setCalendarModal] = useState(false);
-  const [eventModal, setEventModal] = useState(false);
-
-  const [eventTitle, setEventTitle] = useState("");
-  const [editButtonClicked, setEditButtonClicked] = useState(false);
-
   const calendarClick = (target) => {
     setDataPicker(target.dateStr);
     setCalendarModal(true);
   };
+
+  console.log(eventClickId);
 
   const eventClick = (clickInfo) => {
     setEventModal(true);
@@ -51,9 +52,12 @@ export default function EventProvider({ children }) {
     setEventModal(false);
     setCalendarModal(true);
   };
+
+  console.log(dataPicker);
   return (
     <EventContext.Provider
       value={{
+        dataPicker,
         eventClickId,
         setEventClickId,
         eventInput,
