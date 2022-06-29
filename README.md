@@ -70,6 +70,8 @@ npm start
 
 POST
 
+**body**
+
 **/register**
 
 ```json
@@ -101,6 +103,8 @@ POST
 
 **/login**
 
+**body**
+
 ```json
 {
     "email": "julianahappatsch@gmail.com",
@@ -127,6 +131,8 @@ POST
 POST
 
 **/event/create**
+
+**body**
 
 ```json
 {
@@ -157,7 +163,7 @@ PATCH
 
 **/event/edit**
 
-**body ** (atualiza os campos passados, busca o evento pelo id)
+**body**  (atualiza os campos passados pelo body, busca o evento pelo id)
 
 ```json
 {
@@ -174,26 +180,6 @@ PATCH
 DELETE
 
 /event/delete/{userId}
-
-#### Resultado
-
-````json
-{
-    "id": 1,
-    "title": "Hamlet",
-    "date": "2022-07-15",
-    "description": "Amlet",
-    "st": "20:32",
-    "et": "22:00",
-    "userId": 1,
-}
-````
-
-
-
-```json
-
-```
 
 ### Realiza a listagem dos eventos de um usuário
 
