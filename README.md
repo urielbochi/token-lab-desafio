@@ -88,7 +88,7 @@ npm start
 
 **Front-end**: Javascript, React js (Context, Hooks, Router)
 
-**Back-end:** Node.js, JavaScript, Express, JWT, keyv, joi
+**Back-end:** Node.js, JavaScript, Sequelize, MySQL, Express, JWT, keyv, joi
 
 
 
