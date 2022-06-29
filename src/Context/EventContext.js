@@ -28,8 +28,6 @@ export default function EventProvider({ children }) {
     setCalendarModal(true);
   };
 
-  console.log(eventClickId);
-
   const eventClick = (clickInfo) => {
     setEventModal(true);
     setEventClickId(clickInfo.event._def.publicId);
@@ -53,7 +51,6 @@ export default function EventProvider({ children }) {
     setCalendarModal(true);
   };
 
-  console.log(dataPicker);
   return (
     <EventContext.Provider
       value={{
