@@ -6,12 +6,15 @@ const jwt = require("../utils/jwt");
 const bcrypt = require("bcrypt");
 
 exports.register = async (req, res) => {
+  
   const { password, confirmPassword } = req.body;
+
   const isExist = await User.findOne({
     where: {
       email: req.body.email,
     },
   });
+  
   if (isExist) {
     return res.status(400).json({ error: "Email already exists." });
   }
@@ -54,6 +57,8 @@ exports.getUser = async (req, res) => {
   const user = await User.findByPk(req.user.id);
   return res.json(user);
 };
+
+
 
 exports.logout = async (req, res) => {
   const token = req.token;

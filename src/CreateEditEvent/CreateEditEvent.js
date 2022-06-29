@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import { EventContext } from "../Context/EventContext";
 import { postEvent } from "../Services/EventHandler";
 import { editEvent } from "../Services/EventHandler";
 
-function CreateEvent({ userTokenId }) {
+function CreateEditEvent({ userTokenId }) {
   const {
     eventList,
     setEventList,
@@ -39,6 +39,18 @@ function CreateEvent({ userTokenId }) {
     newData[findIndex] = eventInput;
     setEventList(newData);
   };
+
+  const addNewEvent = () => {
+    postEvent(
+      eventInput,
+      eventList,
+      setEventList,
+      userTokenId,
+      dataPicker
+    );
+    setCalendarModal(false);
+    setEventInput({});
+  }
 
   return (
     <div>
@@ -128,15 +140,7 @@ function CreateEvent({ userTokenId }) {
           {!editButtonClicked && (
             <button
               onClick={() => {
-                postEvent(
-                  eventInput,
-                  eventList,
-                  setEventList,
-                  userTokenId,
-                  dataPicker
-                );
-                setCalendarModal(false);
-                setEventInput({});
+                addNewEvent()
               }}
               className="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
             >
@@ -150,7 +154,7 @@ function CreateEvent({ userTokenId }) {
           {editButtonClicked && (
             <button
               onClick={() => {
-                editEvent(eventInput, eventList, setEventList, eventClickId);
+                editEvent(eventInput);
                 frontEditEvent();
                 setCalendarModal(false);
                 setEventClickId("");
@@ -168,4 +172,4 @@ function CreateEvent({ userTokenId }) {
   );
 }
 
-export default CreateEvent;
+export default CreateEditEvent;

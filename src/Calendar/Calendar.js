@@ -3,8 +3,8 @@ import "./Calendar.css";
 import FullCalendar from "@fullcalendar/react";
 import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import CreateEvent from "../CreateEventModal/CreateEvent";
-import ViewEventModal from "../ViewEventModal/EditEvent";
+import CreateEditEvent from "../CreateEditEvent/CreateEditEvent";
+import ViewEventModal from "../ViewEventModal/ViewEventModal";
 import { getUser } from "../Services/UserHandler";
 import { getEvents } from "../Services/EventHandler";
 import { useNavigate } from "react-router-dom";
@@ -74,7 +74,7 @@ function Calendar() {
           })}
         />
       </div>
-      <CreateEvent userTokenId={userIdData} />
+      <CreateEditEvent userTokenId={userIdData} />
       <ViewEventModal />
     </div>
   );

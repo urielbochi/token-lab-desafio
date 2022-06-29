@@ -32,7 +32,9 @@ export default function EventProvider({ children }) {
   const eventClick = (clickInfo) => {
     setEventModal(true);
     setEventClickId(clickInfo.event._def.publicId);
+    console.log(clickInfo.event)
   };
+  console.log(eventClickId)
 
   const exitCalendarModal = () => {
     setCalendarModal(false);

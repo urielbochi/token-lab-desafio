@@ -26,14 +26,6 @@ export async function postEvent(
     })
     .then((response) => {
       setEventList([...eventList, response.data]);
-      console.log({
-        title: eventData.title,
-        description: eventData.description,
-        date: eventData.date,
-        st: eventData.st,
-        et: eventData.et,
-        userId: userTokenId,
-      });
     })
     .catch((err) => console.log(err));
 }

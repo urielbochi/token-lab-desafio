@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import { EventContext } from "../Context/EventContext";
-import CreateEvent from "../CreateEventModal/CreateEvent";
+import CreateEvent from "../CreateEditEvent/CreateEditEvent";
 import { deleteEvent } from "../Services/EventHandler";
 
 function ViewEventModal({}) {
@@ -23,6 +23,12 @@ function ViewEventModal({}) {
     );
     setEventList(newData);
   };
+
+  const deletePath = () => {
+    deleteEvent(eventClickId);
+    frontDeleteEvent(eventClickId);
+    setEventModal(false);
+  }
 
   return (
     <div>
@@ -67,9 +73,7 @@ function ViewEventModal({}) {
                 <div className="flex justify-center mt-5">
                   <button
                     onClick={() => {
-                      deleteEvent(eventClickId);
-                      frontDeleteEvent(eventClickId);
-                      setEventModal(false);
+                      deletePath()
                     }}
                     className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
                   >
@@ -92,7 +96,7 @@ function ViewEventModal({}) {
 
                   <button
                     onClick={() => openEdit()}
-                    className="inline-flex ml-5 items-center px-6 py-2 bg-green-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
+                    className="inline-flex ml-5 items-center px-6 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
