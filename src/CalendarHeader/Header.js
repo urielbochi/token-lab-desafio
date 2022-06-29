@@ -6,7 +6,7 @@ function CalendarHeader() {
   return (
     <div className="mb-10">
       <div className="flex justify-center content-center header__color ">
-        <img src={tokenLab} />
+        <img alt="Header com fundo azul, um logo centralizado escrito Tokenlab Calendary" src={tokenLab} />
       </div>
     </div>
   );

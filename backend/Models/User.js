@@ -17,6 +17,6 @@ const User = sequelize.define('User', {
   updatedAt: 'updated_at'
 }); 
 
-User.hasMany(events)
+// User.hasMany(events)
 
 module.exports = User;

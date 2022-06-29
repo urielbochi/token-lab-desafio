@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS calendary;
+DROP DATABASE IF EXISTS calendar;
 
-CREATE DATABASE calendary;
+CREATE DATABASE calendar;
 
-USE calendary;
+USE calendar;
 
 CREATE TABLE IF NOT EXISTS users(
 `id` INT PRIMARY KEY AUTO_INCREMENT,

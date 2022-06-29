@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import Facebook from "../Images/Facebook.png";
 import Google from "../Images/Google.png";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/Context";
 import { loginAccount } from "../Services/UserHandler";
 

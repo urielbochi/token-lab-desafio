@@ -1,24 +1,15 @@
 const Event = require("../Models/Event");
-const User = require("../Models/User");
 
 exports.create = async (req, res) => {
-  const token = req.headers.authorization;
-
-  let user = await User.findOne({
-    access_token: token,
+  const createEvent = await Event.create({
+    title: req.body.title,
+    date: req.body.date,
+    description: req.body.description,
+    st: req.body.st,
+    et: req.body.et,
+    userId: req.body.userId,
   });
-
-  if (user) {
-    const createEvent = await Event.create({
-      title: req.body.title,
-      date: req.body.date,
-      description: req.body.description,
-      st: req.body.st,
-      et: req.body.et,
-      userId: req.body.userId,
-    });
-    return res.json(createEvent);
-  }
+  return res.json(createEvent);
 };
 
 exports.getUserEvent = async (req, res) => {
@@ -40,7 +31,6 @@ exports.deleteEvent = async (req, res) => {
 
   res.json(userEvent);
 };
-
 
 exports.editEvent = async (req, res) => {
   const id = Number(req.body.id);

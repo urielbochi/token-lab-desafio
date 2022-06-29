@@ -21,7 +21,6 @@ function Calendar() {
 
   const nav = useNavigate();
   const [userIdData, setUserIdData] = useState();
-  const [updater, setUpdater] = useState(0);
 
   useEffect(() => {
     const getUserIdData = async () => {
@@ -55,6 +54,7 @@ function Calendar() {
         <h1 className="text-xl px-8 font__desert hover:bg-sky-200">Account</h1>
         <a
           href="https://www.tokenlab.com.br/pt/about-us"
+          rel="noreferrer"
           target="_blank"
           className="text-xl px-8 font__desert hover:bg-sky-200"
         >

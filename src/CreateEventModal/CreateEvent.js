@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import { EventContext } from "../Context/EventContext";
 import { postEvent } from "../Services/EventHandler";
