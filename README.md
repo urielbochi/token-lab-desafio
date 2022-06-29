@@ -86,7 +86,7 @@ npm start
 
 ## Stacks utilizadas
 
-**Front-end**: Javascript, React js (Context, Hooks, Router)
+**Front-end**: Javascript, React js (Context, Hooks, Router), Tailwind, FullCalendar, React Modal
 
 **Back-end:** Node.js, JavaScript, Sequelize, MySQL, Express, JWT, keyv, joi
 
