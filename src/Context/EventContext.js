@@ -13,7 +13,6 @@ export default function EventProvider({ children }) {
 
   const [eventTitle, setEventTitle] = useState("");
   const [editButtonClicked, setEditButtonClicked] = useState(false);
-  const [eventDate, setEventDate] = useState()
 
   const eventHolder = {
     title: "",
@@ -31,15 +30,9 @@ export default function EventProvider({ children }) {
   };
 
   const eventClick = (clickInfo) => {
-    const date = new Date();
     setEventModal(true);
     setEventClickId(clickInfo.event._def.publicId);
-    setEventDate(new Date(clickInfo.event._instance.range.end))
-    console.log(clickInfo)
-
-
   };
-  console.log(eventList)
 
   const exitCalendarModal = () => {
     setCalendarModal(false);
@@ -82,8 +75,6 @@ export default function EventProvider({ children }) {
         exitCalendarModal,
         exitEventModal,
         openEdit,
-        eventDate,
-        setEventDate
       }}
     >
       {children}
