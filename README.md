@@ -36,7 +36,7 @@ Instale as dependências na pasta base e na pasta back-end
   npm install
 ```
 
-Inicie a aplicação na pasta back-end e depois na front-end
+Inicie a aplicação back-end
 
 ```bash
   npm start
