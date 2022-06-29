@@ -30,17 +30,25 @@ Entrando no repositório
   cd token-lab-desafio
 ```
 
-Instale as dependências e rode a aplicação
+Instale as dependências na pasta base e na pasta back-end
 
 ```bash
-  npm i && npm run buildAll
+  npm install
 ```
 
-Inicie a aplicação
+Inicie a aplicação na pasta back-end e depois na front-end
 
 ```bash
   npm start
 ```
+
+Inicie a aplicação front-end
+
+```
+npm start
+```
+
+
 
 
 
