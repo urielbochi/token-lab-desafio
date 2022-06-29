@@ -49,14 +49,6 @@ export async function editEvent(eventData) {
       id: eventData.id,
     })
     .then((response) => {
-      console.log({
-        title: eventData.title,
-        description: eventData.description,
-        date: eventData.date,
-        st: eventData.st,
-        et: eventData.et,
-        id: eventData.id,
-      });
     })
     .catch((err) => {
       console.log(err);

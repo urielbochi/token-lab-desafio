@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-modal";
 import { EventContext } from "../Context/EventContext";
 import { postEvent } from "../Services/EventHandler";
@@ -17,6 +17,8 @@ function CreateEvent({ userTokenId }) {
     editButtonClicked,
     setEditButtonClicked,
     eventClickId,
+    setEventClickId,
+    eventDate
   } = useContext(EventContext);
 
   const handleChange = ({ target }) => {
@@ -33,14 +35,15 @@ function CreateEvent({ userTokenId }) {
     const newData = [...eventList];
     const findIndex = newData.findIndex(
       (item) => parseInt(item.id) === parseInt(eventClickId)
-    );
-    newData[findIndex] = eventInput;
-    setEventList(newData);
+      );
+      let dateHolder = newData[findIndex].date
+      eventInput.date = dateHolder
+      newData[findIndex] = eventInput
+
+      setEventList(newData)
   };
 
-  console.log(eventList)
 
-  console.log(eventClickId)
 
   return (
     <div>
@@ -49,7 +52,10 @@ function CreateEvent({ userTokenId }) {
         isOpen={calendarModal}
         onRequestClose={exitCalendarModal}
       >
-        <div className="modal-close cursor-pointer flex justify-end" onClick={() => exitCalendarModal()}>
+        <div
+          className="modal-close cursor-pointer flex justify-end"
+          onClick={() => exitCalendarModal()}
+        >
           <svg
             className="fill-current text-black"
             xmlns="http://www.w3.org/2000/svg"
@@ -151,8 +157,8 @@ function CreateEvent({ userTokenId }) {
               onClick={() => {
                 editEvent(eventInput, eventList, setEventList, eventClickId);
                 frontEditEvent();
-                setCalendarModal(false)
-
+                setCalendarModal(false);
+                setEventClickId('')
               }}
               className="relative inline-flex items-center justify-center p-0.5 mb-2 mt-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
             >
