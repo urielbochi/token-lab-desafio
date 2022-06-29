@@ -18,31 +18,63 @@ O desafio consiste em fazer um sistema web de calendário de eventos com backend
 
 ## Instruções
 
-Clonando o repositório
+* Clonando o repositório
 
 ```bash
 https://github.com/urielbochi/token-lab-desafio.git
 ```
 
-Entrando no repositório
+* Entrando no repositório
 
 ```bash
   cd token-lab-desafio
 ```
 
-Instale as dependências na pasta base e na pasta back-end
+* Instale as dependências na pasta base e na pasta backend
 
 ```bash
   npm install
 ```
 
-Inicie a aplicação back-end
+* Execute o arquivo **query** na pasta backend em um banco de dados SQL ou copie abaixo e execute.
+
+  ```sql
+  DROP DATABASE IF EXISTS calendar;
+  
+  CREATE DATABASE calendar;
+  
+  USE calendar;
+  
+  CREATE TABLE IF NOT EXISTS users(
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(250) NOT NULL,
+  email VARCHAR(250) NOT NULL,
+  password VARCHAR(250) NOT NULL,
+  created_At VARCHAR(250),
+  updated_At VARCHAR(250)
+  ) engine = InnoDB;
+  
+  CREATE TABLE IF NOT EXISTS events(
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(250) NOT NULL,
+  date VARCHAR(250) NOT NULL,
+  description VARCHAR(250) NOT NULL,
+  st VARCHAR(10),
+  et VARCHAR(10),
+  userId integer,
+  FOREIGN KEY(`userId`)
+  REFERENCES `users` (`id`)
+  ) engine = InnoDB;
+  
+  ```
+
+* Inicie a aplicação back-end
 
 ```bash
   npm start
 ```
 
-Inicie a aplicação front-end
+* Inicie a aplicação front-end
 
 ```
 npm start
