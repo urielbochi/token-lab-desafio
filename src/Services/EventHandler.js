@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export async function getEvents(userId, setEventList) {
+export async function getEvents(authToken, setEventList) {
   axios
-    .get(`http://localhost:3000/event/list/${userId}`, {})
+    .get(`http://localhost:3000/event`, { headers: { Authorization: authToken } })
     .then((response) => {
       setEventList(response.data);
     })
@@ -13,17 +13,16 @@ export async function postEvent(
   eventData,
   eventList,
   setEventList,
-  userTokenId
+  authToken
 ) {
   axios
-    .post("http://localhost:3000/event/create", {
+    .post("http://localhost:3000/event", {
       title: eventData.title,
       description: eventData.description,
       date: eventData.date,
       st: eventData.st,
       et: eventData.et,
-      userId: userTokenId,
-    })
+    }, { headers: { Authorization: authToken } })
     .then((response) => {
       setEventList([...eventList, response.data]);
     })
@@ -47,9 +46,9 @@ export async function editEvent(eventData) {
     });
 }
 
-export async function deleteEvent(eventId) {
+export async function deleteEvent(eventId, authToken) {
   axios
-    .delete(`http://localhost:3000/event/delete/${eventId}`)
+    .delete(`http://localhost:3000/event/${eventId}`, { headers: { Authorization: authToken } })
     .then((response) => {})
     .catch((err) => console.log(err));
 }

@@ -16,6 +16,9 @@ function ViewEventModal({}) {
     eventClickId,
   } = useContext(EventContext);
 
+  const userToken = JSON.parse(localStorage.getItem("userToken"));
+
+
 
   const frontDeleteEvent = (eventClickId) => {
     const newData = eventList.filter(
@@ -25,7 +28,7 @@ function ViewEventModal({}) {
   };
 
   const deletePath = () => {
-    deleteEvent(eventClickId);
+    deleteEvent(eventClickId, userToken);
     frontDeleteEvent(eventClickId);
     setEventModal(false);
   }

@@ -19,6 +19,9 @@ function CreateEditEvent({ userTokenId }) {
     setEventClickId,
   } = useContext(EventContext);
 
+  const userToken = JSON.parse(localStorage.getItem("userToken"));
+
+
   const handleChange = ({ target }) => {
     const { name, value } = target;
     setEventInput({
@@ -45,8 +48,7 @@ function CreateEditEvent({ userTokenId }) {
       eventInput,
       eventList,
       setEventList,
-      userTokenId,
-      dataPicker
+      userToken
     );
     setCalendarModal(false);
     setEventInput({});

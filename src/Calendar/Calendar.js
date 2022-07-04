@@ -36,7 +36,7 @@ function Calendar() {
 
   useEffect(() => {
     const recoverUserEvents = async () => {
-      const data = await getEvents(userIdData, setEventList);
+      const data = await getEvents(userToken, setEventList);
     };
     recoverUserEvents();
   }, [userIdData]);
