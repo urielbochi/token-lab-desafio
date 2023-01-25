@@ -2,11 +2,7 @@
 
 Boas vindas ao repositório do desafio Token Lab. 
 
-Projeto desenvolvido para uma vaga de estágio na Token Lab.
-
 O desafio consiste em fazer um sistema web de calendário de eventos com backend e frontend.
-
-
 
 # Sumário
 
@@ -30,54 +26,70 @@ https://github.com/urielbochi/token-lab-desafio.git
   cd token-lab-desafio
 ```
 
-* Instale as dependências na pasta base e na pasta backend
+* Instale as dependências na pasta base
+
+```bash
+  npm install @craco/craco --save --legacy-peer-deps
+```
+
+* Acesse a pasta backend e execute o comando
 
 ```bash
   npm install
 ```
 
+* Configure o arquivo .env, encontrado na pasta backend
+
+```
+DB_HOST=localhost
+DB_DATABASE=calendar
+DB_USERNAME=Your DB username here
+DB_PASSWORD= Your DB password here
+JWT_SECRET=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY1NjI2MjQ5NiwiaWF0IjoxNjU2MjYyNDk2fQ.sSLi54ZdM2fwRKUC5FPBxlB9NGVMR4zBDsemM2_uJyg
+```
+
 * Execute o arquivo **query** na pasta backend em um banco de dados SQL ou copie abaixo e execute.
 
-  ```sql
-  DROP DATABASE IF EXISTS calendar;
-  
-  CREATE DATABASE calendar;
-  
-  USE calendar;
-  
-  CREATE TABLE IF NOT EXISTS users(
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(250) NOT NULL,
-  email VARCHAR(250) NOT NULL,
-  password VARCHAR(250) NOT NULL,
-  created_At VARCHAR(250),
-  updated_At VARCHAR(250)
-  ) engine = InnoDB;
-  
-  CREATE TABLE IF NOT EXISTS events(
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  title VARCHAR(250) NOT NULL,
-  date VARCHAR(250) NOT NULL,
-  description VARCHAR(250) NOT NULL,
-  st VARCHAR(10),
-  et VARCHAR(10),
-  userId integer,
-  FOREIGN KEY(`userId`)
-  REFERENCES `users` (`id`)
-  ) engine = InnoDB;
-  
-  ```
+```sql
+DROP DATABASE IF EXISTS calendar;
 
-* Inicie a aplicação back-end
+CREATE DATABASE calendar;
+
+USE calendar;
+
+CREATE TABLE IF NOT EXISTS users(
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+name VARCHAR(250) NOT NULL,
+email VARCHAR(250) NOT NULL,
+password VARCHAR(250) NOT NULL,
+created_At VARCHAR(250),
+updated_At VARCHAR(250)
+) engine = InnoDB;
+
+CREATE TABLE IF NOT EXISTS events(
+`id` INT PRIMARY KEY AUTO_INCREMENT,
+title VARCHAR(250) NOT NULL,
+date VARCHAR(250) NOT NULL,
+description VARCHAR(250) NOT NULL,
+st VARCHAR(10),
+et VARCHAR(10),
+userId integer,
+FOREIGN KEY(`userId`)
+REFERENCES `users` (`id`)
+) engine = InnoDB;
+
+```
+
+* Inicie a aplicação backend, executando o comando abaixo dentro da pasta backend
 
 ```bash
   npm start
 ```
 
-* Inicie a aplicação front-end
+* Inicie a aplicação frontend, executando o comando abaixo dentro da pasta frontend
 
-```
-npm start
+```bash
+ npm start
 ```
 
 
